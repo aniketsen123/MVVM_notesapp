@@ -57,4 +57,5 @@ dependencies {
 
     // Splash screen
     implementation 'com.airbnb.android:lottie:3.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
 }

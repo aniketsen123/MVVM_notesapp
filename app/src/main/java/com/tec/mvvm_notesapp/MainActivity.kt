@@ -17,6 +17,8 @@ import com.tec.mvvm_notesapp.Database.NoteDatabase
 import com.tec.mvvm_notesapp.databinding.ActivityMainBinding
 import com.tec.mvvm_notesapp.models.NoteViewModel
 import com.tec.mvvm_notesapp.models.Notes
+import androidx.appcompat.app.AlertDialog
+
 
 class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
     PopupMenu.OnMenuItemClickListener {
@@ -109,12 +111,32 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
         popupMenu.show()
     }
 
+//    override fun onMenuItemClick(item: MenuItem?): Boolean {
+//        if(item?.itemId==R.id.delete_node)
+//        {
+//            noteViewModel.delete(selectednote)
+//            return true
+//        }
+//        return false
+//    }
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if(item?.itemId==R.id.delete_node)
         {
-            noteViewModel.delete(selectednote)
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to delete this note?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    noteViewModel.delete(selectednote)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
             return true
         }
         return false
     }
+
 }
