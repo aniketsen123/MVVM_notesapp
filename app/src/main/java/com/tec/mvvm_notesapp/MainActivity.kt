@@ -1,6 +1,8 @@
 package com.tec.mvvm_notesapp
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,12 +13,14 @@ import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.tec.mvvm_notesapp.Adapter.NotesAdapter
 import com.tec.mvvm_notesapp.Database.NoteDatabase
 import com.tec.mvvm_notesapp.databinding.ActivityMainBinding
 import com.tec.mvvm_notesapp.models.NoteViewModel
 import com.tec.mvvm_notesapp.models.Notes
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
     PopupMenu.OnMenuItemClickListener {
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
         }
 
     }
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          binding=ActivityMainBinding.inflate(layoutInflater)
@@ -112,7 +117,23 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if(item?.itemId==R.id.delete_node)
         {
-            noteViewModel.delete(selectednote)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Delete Record")
+            builder.setMessage("Are you sure you want to ${selectednote.title} ?")
+            builder.setPositiveButton("Yes"){dialoginterface,_->
+                lifecycleScope.launch{
+                    noteViewModel.delete(selectednote)
+                }
+                dialoginterface.dismiss()
+            }
+            builder.setNegativeButton("No"){
+                    dialoginterface,_->
+                dialoginterface.dismiss()
+            }
+            val alertdialog:AlertDialog=builder.create()
+            alertdialog.setCanceledOnTouchOutside(false)
+            alertdialog.show()
+
             return true
         }
         return false
