@@ -6,7 +6,17 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#252525</color>
+    <color name="blue">#3269FF</color>
+    <color name="green">#429EA6</color>
+    <color name="indigo">#153B50</color>
+    <color name="purple">#8789C0</color>
+    <color name="grayish">#414361</color>
+    <color name="pink">#824670</color>
+
+
+
 
     <color name="Color1">#CED617D6</color>
     <color name="Color2">#4FCF89</color>

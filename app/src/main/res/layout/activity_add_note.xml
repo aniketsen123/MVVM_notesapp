@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".add_note">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-
         android:layout_height="53dp"
-
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +58,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Title"
+        android:textColorHint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -69,10 +69,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:inputType="textMultiLine"
+        android:textColorHint="@color/blue"
         android:ems="10"
         android:hint="Start Typing"
         android:gravity="top"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
