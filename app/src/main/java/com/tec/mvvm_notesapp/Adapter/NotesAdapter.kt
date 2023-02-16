@@ -83,13 +83,13 @@ class NotesAdapter(private val context:Context,
     }
 
     fun RandomColor():Int{
-      val list= ArrayList<Int>()
-        list.add(R.color.Color1)
-        list.add(R.color.Color2)
-        list.add(R.color.Color3)
-        list.add(R.color.Color4)
-        list.add(R.color.Color5)
-        list.add(R.color.Color6)
+            val list= ArrayList<Int>()
+            list.add(R.color.blue)
+            list.add(R.color.green)
+            list.add(R.color.indigo)
+            list.add(R.color.purple)
+            list.add(R.color.grayish)
+            list.add(R.color.pink)
 
         val seed=System.currentTimeMillis().toInt()
          val randomIndex= Random(seed.toLong()).nextInt(list.size)
