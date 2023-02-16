@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/gray"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:listitem="@layout/list_item" />
 
@@ -37,11 +38,12 @@
         android:layout_marginBottom="56dp"
         android:clickable="true"
         android:contentDescription="@string/app_name"
+        app:backgroundTint="#F44336"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/add"
-        tools:ignore="ImageContrastCheck" />
+        app:srcCompat="@drawable/plus"
+        tools:ignore="ImageContrastCheck"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
