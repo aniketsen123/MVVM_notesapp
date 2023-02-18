@@ -35,7 +35,7 @@ class NotesAdapter(private val context:Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Noteslist.add(1,Notes(1,":dsfds","dsfds","Dsfs"))
+
        val currentnote=Noteslist[position]
         holder.title.text=currentnote.title
         holder.title.isSelected=true
@@ -87,14 +87,13 @@ class NotesAdapter(private val context:Context,
             list.add(R.color.blue)
             list.add(R.color.green)
             list.add(R.color.indigo)
-            list.add(R.color.purple)
-            list.add(R.color.grayish)
+            list.add(R.color.rose)
+            list.add(R.color.choco)
             list.add(R.color.pink)
 
         val seed=System.currentTimeMillis().toInt()
          val randomIndex= Random(seed.toLong()).nextInt(list.size)
         return list[randomIndex]
-
 
     }
 
