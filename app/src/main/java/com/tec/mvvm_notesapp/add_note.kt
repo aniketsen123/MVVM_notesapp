@@ -37,6 +37,18 @@ class add_note : AppCompatActivity() {
         {
             e.printStackTrace()
         }
+
+        // Share Notes feature
+        binding.share.setOnClickListener {
+            val message = binding.etNotes.text.toString()
+            val title = binding.etTitle.text.toString()
+            val shareNote = "${"Title: $title"}\n${message} "
+            val myIntent= Intent(Intent.ACTION_SEND)
+            myIntent.type = "text/plane"
+            myIntent.putExtra(Intent.EXTRA_TEXT,shareNote)
+            this.startActivity(myIntent)
+        }
+
         binding.check.setOnClickListener {
             val title = binding.etTitle.text.toString()
             val note_desc = binding.etNotes.text.toString()
