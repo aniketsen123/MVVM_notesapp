@@ -2,7 +2,6 @@ package com.tec.mvvm_notesapp
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -133,21 +132,8 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
             val alert = builder.create()
             alert.show()
 
-            builder.setTitle("Delete Record")
-            builder.setMessage("Are you sure you want to ${selectednote.title} ?")
-            builder.setPositiveButton("Yes"){dialoginterface,_->
-                lifecycleScope.launch{
-                    noteViewModel.delete(selectednote)
-                }
-                dialoginterface.dismiss()
-            }
-            builder.setNegativeButton("No"){
-                    dialoginterface,_->
-                dialoginterface.dismiss()
-            }
-            val alertdialog:AlertDialog=builder.create()
-            alertdialog.setCanceledOnTouchOutside(false)
-            alertdialog.show()
+
+
 
 
             return true
