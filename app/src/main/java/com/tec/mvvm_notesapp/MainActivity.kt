@@ -20,7 +20,6 @@ import com.tec.mvvm_notesapp.Database.NoteDatabase
 import com.tec.mvvm_notesapp.databinding.ActivityMainBinding
 import com.tec.mvvm_notesapp.models.NoteViewModel
 import com.tec.mvvm_notesapp.models.Notes
-import androidx.appcompat.app.AlertDialog
 import kotlinx.coroutines.launch
 
 
