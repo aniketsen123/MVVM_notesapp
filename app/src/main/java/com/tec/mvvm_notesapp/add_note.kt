@@ -31,6 +31,7 @@ class add_note : AppCompatActivity() {
         try {
             old_note=intent.getSerializableExtra("current_note") as Notes
             binding.etTitle.setText(old_note.title)
+            binding.edtSubtitle.setText(old_note.subtitle)
             binding.etNotes.setText(old_note.note)
             isUpdate=true
         }catch (e:Exception)
@@ -51,15 +52,18 @@ class add_note : AppCompatActivity() {
 
         binding.check.setOnClickListener {
             val title = binding.etTitle.text.toString()
+            val subtitle = binding.edtSubtitle.text.toString()
             val note_desc = binding.etNotes.text.toString()
-            if (title.isNotEmpty() && note_desc.isNotEmpty()) {
+            if (title.isNotEmpty() && subtitle.isNotEmpty() && note_desc.isNotEmpty()) {
                 val formaltime = SimpleDateFormat("EEE, d.MMM.yyyy (HH:mm a)")
                 if (isUpdate) {
-                    note = Notes(old_note.id, title, note_desc, formaltime.format(Date()))
+                    note = Notes(old_note.id, title, subtitle, note_desc, formaltime.format(Date()))
                 } else {
-                    note = Notes(null, title, note_desc, formaltime.format(Date()))
+                    note = Notes(null, title, subtitle, note_desc, formaltime.format(Date()))
                 }
-//Toast.makeText(this,"$title   $note_desc",Toast.LENGTH_SHORT).show()
+
+                //Toast.makeText(this,"$title  $note_desc",Toast.LENGTH_SHORT).show()
+
 
                 val intent = Intent()
                 intent.putExtra("note", note)
@@ -68,7 +72,7 @@ class add_note : AppCompatActivity() {
             }
             else
             {
-                Toast.makeText(this,"Enter Title and Note",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Fill all entries",Toast.LENGTH_SHORT).show()
             }
         }
         binding.back.setOnClickListener {

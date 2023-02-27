@@ -34,14 +34,13 @@
 
     </RelativeLayout>
     <TextView
-        android:id="@+id/tv_notes"
+        android:id="@+id/tv_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="10"
         android:padding="8dp"
         android:layout_alignParentStart="true"
-        android:text="Notes"
-
+        android:text="Subtitle"
         android:textSize="17sp"
         android:textColor="@color/white"
         />
