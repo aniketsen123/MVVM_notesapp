@@ -2,10 +2,12 @@ package com.tec.mvvm_notesapp
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.SearchView
@@ -13,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.tec.mvvm_notesapp.Adapter.NotesAdapter
 import com.tec.mvvm_notesapp.Database.NoteDatabase
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
         setContentView(binding.root)
 
         initUi()
+        setUpFab()
     noteViewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
 
         noteViewModel.allnotes.observe(this,{list->
@@ -57,6 +61,19 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
             }
         })
         noteDatabase=NoteDatabase.getDatabase(this)
+    }
+
+    private fun setUpFab() {
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
+                    binding.fabText.visibility = View.GONE
+                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
+                    binding.fabText.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     private fun initUi() {
@@ -75,7 +92,11 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
             }
 
         }
-        binding.floatingActionButton.setOnClickListener {
+        binding.fab.setOnClickListener {
+            val intent=Intent(this,add_note::class.java)
+            getcontent.launch(intent)
+        }
+        binding.fabCircle.setOnClickListener {
             val intent=Intent(this,add_note::class.java)
             getcontent.launch(intent)
         }
