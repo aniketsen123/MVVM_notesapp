@@ -33,7 +33,12 @@ class SplashScreen : AppCompatActivity() {
 // status bar is hidden, so hide that too if necessary.
         actionBar?.hide()
 
+        val backgroundanimation: LottieAnimationView= findViewById(R.id.animation_view)
 
+        Handler().postDelayed({
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        },2659)
 
 
     }
