@@ -23,9 +23,7 @@ class SplashScreen : AppCompatActivity() {
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
-        animationView.playAnimation()**/
-
-
+        animationView.playAnimation()*/
 
         setContentView(R.layout.activity_splash_screen)
         this.supportActionBar?.hide()
@@ -35,11 +33,8 @@ class SplashScreen : AppCompatActivity() {
 // status bar is hidden, so hide that too if necessary.
         actionBar?.hide()
 
-        val backgroundanimation: LottieAnimationView= findViewById(R.id.animation_view)
 
-        Handler().postDelayed({
-            startActivity(Intent(this,MainActivity::class.java))
-            finish()
-        },2708)
+
+
     }
 }
