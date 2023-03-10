@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Open-Source/JWOC contributor/MVVM_notesapp/app/src/main/res/drawable/add.xml" value="0.177" />
+        <entry key="..\:/Open-Source/JWOC contributor/MVVM_notesapp/app/src/main/res/drawable/front_ui_bg.xml" value="0.177" />
+        <entry key="..\:/Open-Source/JWOC contributor/MVVM_notesapp/app/src/main/res/layout/activity_add_note.xml" value="0.19610507246376813" />
+        <entry key="..\:/Open-Source/JWOC contributor/MVVM_notesapp/app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="..\:/Open-Source/JWOC contributor/MVVM_notesapp/app/src/main/res/layout/list_item.xml" value="0.19610507246376813" />
         <entry key="..\:/Users/anike/AndroidStudioProjects/MVVM_notesapp/app/src/main/res/layout/activity_add_note.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/anike/AndroidStudioProjects/MVVM_notesapp/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/anike/AndroidStudioProjects/MVVM_notesapp/app/src/main/res/layout/list_item.xml" value="0.22826086956521738" />
