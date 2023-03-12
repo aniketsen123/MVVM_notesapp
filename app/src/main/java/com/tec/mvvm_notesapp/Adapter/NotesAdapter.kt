@@ -19,14 +19,14 @@ import kotlin.random.Random
 class NotesAdapter(private val context:Context,
                    val listner:NotesClickListner,
 
-): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+                   ): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
     private val Noteslist=ArrayList<Notes>()
     private val Fulllist=ArrayList<Notes>()
 
     inner class ViewHolder(itemview:View):RecyclerView.ViewHolder(itemview){
-       val notes_layout=itemview.findViewById<CardView>(R.id.card_layout)
+        val notes_layout=itemview.findViewById<CardView>(R.id.card_layout)
         val title=itemview.findViewById<TextView>(R.id.tv_title)
-        val notes=itemview.findViewById<TextView>(R.id.tv_notes)
+        val subtitle=itemview.findViewById<TextView>(R.id.tv_subtitle)
         val date=itemview.findViewById<TextView>(R.id.tv_date)
     }
 
@@ -35,20 +35,21 @@ class NotesAdapter(private val context:Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Noteslist.add(1,Notes(1,":dsfds","dsfds","Dsfs"))
-       val currentnote=Noteslist[position]
+
+        val currentnote=Noteslist[position]
         holder.title.text=currentnote.title
         holder.title.isSelected=true
-        holder.notes.text=currentnote.note
+        holder.subtitle.text=currentnote.subtitle
+        holder.subtitle.isSelected=true
         holder.date.text=currentnote.date
         holder.date.isSelected=true
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             holder.notes_layout.setCardBackgroundColor(holder.itemView.resources.getColor(RandomColor(),null))
         }
-   holder.notes_layout.setOnClickListener {
-       listner.OnItemClick(Noteslist[holder.adapterPosition])
-   }
+        holder.notes_layout.setOnClickListener {
+            listner.OnItemClick(Noteslist[holder.adapterPosition])
+        }
         holder.notes_layout.setOnLongClickListener {
             listner.OnLongItemCLick(Noteslist[holder.adapterPosition],holder.notes_layout)
             true
@@ -72,29 +73,28 @@ class NotesAdapter(private val context:Context,
         for(item in Fulllist){
             if(item.title?.lowercase()?.contains(search.lowercase())==true || item.note?.lowercase()?.contains(search.lowercase())==true)
             {
-                  Noteslist.add(item)
+                Noteslist.add(item)
             }
         }
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-      return Noteslist.size
+        return Noteslist.size
     }
 
     fun RandomColor():Int{
-      val list= ArrayList<Int>()
-        list.add(R.color.Color1)
-        list.add(R.color.Color2)
-        list.add(R.color.Color3)
-        list.add(R.color.Color4)
-        list.add(R.color.Color5)
-        list.add(R.color.Color6)
+        val list= ArrayList<Int>()
+        list.add(R.color.blue)
+        list.add(R.color.green)
+        list.add(R.color.indigo)
+        list.add(R.color.rose)
+        list.add(R.color.choco)
+        list.add(R.color.pink)
 
         val seed=System.currentTimeMillis().toInt()
-         val randomIndex= Random(seed.toLong()).nextInt(list.size)
+        val randomIndex= Random(seed.toLong()).nextInt(list.size)
         return list[randomIndex]
-
 
     }
 

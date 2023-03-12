@@ -6,7 +6,18 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#252525</color>
+    <color name="blue">#BDCDD6</color>
+    <color name="green">#C9F4AA</color>
+    <color name="indigo">#BFDCE5</color>
+    <color name="rose">#FAAB78</color>
+    <color name="choco">#CFB997</color>
+    <color name="pink">#FCC2FC</color>
+    <color name="light_gray">#D6D6D6</color>
+
+
+
 
     <color name="Color1">#CED617D6</color>
     <color name="Color2">#4FCF89</color>

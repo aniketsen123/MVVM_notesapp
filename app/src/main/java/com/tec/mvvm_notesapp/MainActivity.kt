@@ -1,22 +1,29 @@
 package com.tec.mvvm_notesapp
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.tec.mvvm_notesapp.Adapter.NotesAdapter
 import com.tec.mvvm_notesapp.Database.NoteDatabase
 import com.tec.mvvm_notesapp.databinding.ActivityMainBinding
 import com.tec.mvvm_notesapp.models.NoteViewModel
 import com.tec.mvvm_notesapp.models.Notes
+import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
     PopupMenu.OnMenuItemClickListener {
@@ -36,12 +43,14 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
         }
 
     }
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initUi()
+        setUpFab()
     noteViewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
 
         noteViewModel.allnotes.observe(this,{list->
@@ -52,6 +61,19 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
             }
         })
         noteDatabase=NoteDatabase.getDatabase(this)
+    }
+
+    private fun setUpFab() {
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
+                    binding.fabText.visibility = View.GONE
+                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
+                    binding.fabText.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     private fun initUi() {
@@ -70,7 +92,11 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
             }
 
         }
-        binding.floatingActionButton.setOnClickListener {
+        binding.fab.setOnClickListener {
+            val intent=Intent(this,add_note::class.java)
+            getcontent.launch(intent)
+        }
+        binding.fabCircle.setOnClickListener {
             val intent=Intent(this,add_note::class.java)
             getcontent.launch(intent)
         }
@@ -108,13 +134,31 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
          popupMenu.inflate(R.menu.pop_up_menu)
         popupMenu.show()
     }
-
+    
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if(item?.itemId==R.id.delete_node)
         {
-            noteViewModel.delete(selectednote)
+            val builder = AlertDialog.Builder(this)
+
+            builder.setMessage("Are you sure you want to delete this note?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    noteViewModel.delete(selectednote)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
+
+
+
+
             return true
         }
         return false
     }
+
 }
