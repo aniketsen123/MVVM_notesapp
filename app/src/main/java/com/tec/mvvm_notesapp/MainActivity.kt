@@ -157,16 +157,6 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner
                   alertDialog.dismiss()
               }
           }
-
-
-
-
-
-
-
-
-
-
       }
 
 

@@ -11,14 +11,14 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/main_screen_bg"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/main_screen_bg"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:listitem="@layout/list_item" />
+        tools:listitem="@layout/list_item"/>
 
     <SearchView
         android:id="@+id/searchView"
@@ -45,6 +45,6 @@
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plus"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
