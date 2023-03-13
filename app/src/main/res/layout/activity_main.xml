@@ -4,8 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     tools:context=".MainActivity">
 
+
+    <FrameLayout
+        android:id="@+id/fl_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/front_ui_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/searchView"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MVVM NotesApp"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+
+            />
+
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -18,33 +44,81 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/main_screen_bg"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:listitem="@layout/list_item"/>
+        tools:listitem="@layout/list_item" />
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:layout_margin="5dp"
+        android:background="@drawable/edit_text_background"
+
+        android:layout_margin="20dp"
         android:iconifiedByDefault="false"
         android:queryHint="Search Notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/fl_heading" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+
+    <LinearLayout
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:clickable="true"
-        android:contentDescription="@string/app_name"
-        app:backgroundTint="#FCFFE7"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/fab_drawable"
+        android:backgroundTint="#FCFFE7"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:outlineProvider="none"
+        android:outlineSpotShadowColor="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/plus"
-        tools:ignore="ImageContrastCheck"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_circle"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/normal_button"
+            app:backgroundTint="#FCFFE7"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/add_btn"/>
+
+        <TextView
+            android:id="@+id/fab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="10dp"
+            android:text="Add Notes"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/floatingActionButton"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="56dp"-->
+    <!--        android:clickable="true"-->
+    <!--        android:contentDescription="@string/app_name"-->
+    <!--        app:backgroundTint="#FCFFE7"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.904"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:srcCompat="@drawable/plus"-->
+    <!--        tools:ignore="ImageContrastCheck"/>-->
+
+
+    <!--    app:backgroundTint="#FCFFE7"-->
 </androidx.constraintlayout.widget.ConstraintLayout>

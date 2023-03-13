@@ -16,7 +16,6 @@ import com.tec.mvvm_notesapp.Database.NotesRepository
 import com.tec.mvvm_notesapp.databinding.ActivityAddNoteBinding
 import com.tec.mvvm_notesapp.models.NoteViewModel
 import com.tec.mvvm_notesapp.models.Notes
-import com.tec.mvvm_notesapp.utils.Deletealertbox
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*

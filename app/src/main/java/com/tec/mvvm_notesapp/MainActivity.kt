@@ -108,11 +108,14 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner
             }
 
         }
-        binding.floatingActionButton.setOnClickListener {
-            val intent = Intent(this, add_note::class.java)
+        binding.fab.setOnClickListener {
+            val intent=Intent(this,add_note::class.java)
             getcontent.launch(intent)
         }
-
+        binding.fabCircle.setOnClickListener {
+            val intent=Intent(this,add_note::class.java)
+            getcontent.launch(intent)
+        }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
