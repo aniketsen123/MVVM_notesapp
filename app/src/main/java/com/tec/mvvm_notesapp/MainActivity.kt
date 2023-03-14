@@ -2,35 +2,43 @@ package com.tec.mvvm_notesapp
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.MenuItem
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.PopupMenu
-import android.widget.SearchView
+import android.view.Window
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tec.mvvm_notesapp.Adapter.NotesAdapter
+import com.tec.mvvm_notesapp.Database.NoteDao
 import com.tec.mvvm_notesapp.Database.NoteDatabase
 import com.tec.mvvm_notesapp.databinding.ActivityMainBinding
+import com.tec.mvvm_notesapp.databinding.DialogDeleteBinding
+import com.tec.mvvm_notesapp.databinding.ListItemBinding
 import com.tec.mvvm_notesapp.models.NoteViewModel
 import com.tec.mvvm_notesapp.models.Notes
 import kotlinx.coroutines.launch
 
 
-class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
-    PopupMenu.OnMenuItemClickListener {
+class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner
+      {
     lateinit var binding: ActivityMainBinding
     lateinit var noteDatabase: NoteDatabase
     lateinit var noteViewModel: NoteViewModel
     lateinit var notesAdapter: NotesAdapter
+    lateinit var listItemBinding: ListItemBinding
     private lateinit var selectednote:Notes
     private var updateNote=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result->
         if(result.resultCode==Activity.RESULT_OK)
@@ -46,12 +54,14 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         binding=ActivityMainBinding.inflate(layoutInflater)
+        binding=ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        listItemBinding= ListItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initUi()
-        setUpFab()
-    noteViewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
+        noteViewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
 
         noteViewModel.allnotes.observe(this,{list->
             list?.let{
@@ -61,33 +71,39 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
             }
         })
         noteDatabase=NoteDatabase.getDatabase(this)
-    }
 
-    private fun setUpFab() {
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0 && binding.fabText.visibility == View.VISIBLE) {
-                    binding.fabText.visibility = View.GONE
-                } else if (dy < 0 && binding.fabText.visibility != View.VISIBLE) {
-                    binding.fabText.visibility = View.VISIBLE
+
+        listItemBinding.deleteButton.setOnClickListener {
+            val dialog = Dialog(this)
+                dialog.setContentView(R.layout.dialog_delete)
+                val yesButton = dialog.findViewById<Button>(R.id.delete_yes)
+                yesButton.setOnClickListener {
+                    dialog.dismiss()
                 }
-            }
-        })
+
+                val noButton = dialog.findViewById<Button>(R.id.delete_no)
+                noButton.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
+
+        }
+
+
     }
 
     private fun initUi() {
- binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager=StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
         notesAdapter= NotesAdapter(this,this)
-      binding.recyclerView.adapter=notesAdapter
+        binding.recyclerView.adapter=notesAdapter
         val getcontent=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result->
             if(result.resultCode==Activity.RESULT_OK)
             {
                 val note=result.data?.getSerializableExtra("note") as? Notes
                 if(note!=null)
                 {
-                      noteViewModel.insert(note)
+                    noteViewModel.insert(note)
                 }
             }
 
@@ -118,47 +134,33 @@ class MainActivity : AppCompatActivity(),NotesAdapter.NotesClickListner,
     }
 
     override fun OnItemClick(notes: Notes) {
-        val intent=Intent(this,add_note::class.java)
-        intent.putExtra("current_note",notes)
+        val intent = Intent(this, add_note::class.java)
+        intent.putExtra("current_note", notes)
         updateNote.launch(intent)
     }
 
-    override fun OnLongItemCLick(notes: Notes, cardView: CardView) {
-        selectednote=notes
-        popupDisplay(cardView)
-    }
+          override fun OnLongItemCLick(notes: Notes, cardView: CardView) {
+              val builder = AlertDialog.Builder(this)
+              val dialogView = layoutInflater.inflate(R.layout.dialog_delete, null)
+              builder.setView(dialogView)
+              builder.setCancelable(false) // Disable dialog dismiss
+              val dialogYes = dialogView.findViewById<Button>(R.id.delete_yes)
+              val dialogNo = dialogView.findViewById<Button>(R.id.delete_no)
+              val alertDialog = builder.create()
+              alertDialog.show()
+              dialogYes.setOnClickListener {
+                  selectednote=notes
+                  lifecycleScope.launch {
+                      noteViewModel.delete(selectednote)
+                  }
+                  alertDialog.dismiss()
+              }
 
-    private fun popupDisplay(cardView: CardView) {
-          val popupMenu=PopupMenu(this,cardView)
-        popupMenu.setOnMenuItemClickListener(this@MainActivity)
-         popupMenu.inflate(R.menu.pop_up_menu)
-        popupMenu.show()
-    }
-    
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        if(item?.itemId==R.id.delete_node)
-        {
-            val builder = AlertDialog.Builder(this)
-
-            builder.setMessage("Are you sure you want to delete this note?")
-                .setCancelable(false)
-                .setPositiveButton("Yes") { dialog, id ->
-                    noteViewModel.delete(selectednote)
-                    dialog.dismiss()
-                }
-                .setNegativeButton("No") { dialog, id ->
-                    dialog.dismiss()
-                }
-            val alert = builder.create()
-            alert.show()
+              dialogNo.setOnClickListener {
+                  alertDialog.dismiss()
+              }
+          }
+      }
 
 
 
-
-
-            return true
-        }
-        return false
-    }
-
-}
