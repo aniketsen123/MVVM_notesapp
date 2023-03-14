@@ -90,10 +90,11 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/edit_text_background"
             android:ems="10"
+            android:fontFamily="@font/productsansregular"
             android:hint="Title"
             android:inputType="textPersonName"
             android:padding="10dp"
-            android:textColorHint="@color/Color5"
+            android:textColorHint="@color/lgt_gry"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
@@ -106,10 +107,11 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/edit_text_background"
             android:ems="10"
+            android:fontFamily="@font/productsansregular"
             android:hint="Subtitle"
             android:inputType="textPersonName"
             android:padding="10dp"
-            android:textColorHint="@color/Color5"
+            android:textColorHint="@color/lgt_gry"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
@@ -118,6 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_margin="16dp"
+            android:fontFamily="@font/productsansregular"
             android:background="@drawable/edit_text_background"
             android:ems="10"
             android:gravity="top"
@@ -125,7 +128,7 @@
             android:inputType="textMultiLine"
             android:padding="10dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/Color5"
+            android:textColorHint="@color/lgt_gry"
             app:layout_constraintTop_toBottomOf="@+id/et_title" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
