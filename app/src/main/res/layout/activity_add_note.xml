@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_bg"
+    android:background="@drawable/gradient_bg"
     tools:context=".add_note">
 
     <androidx.appcompat.widget.Toolbar
@@ -29,7 +29,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="7dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:padding="10dp"
                 app:srcCompat="@drawable/check" />
@@ -42,7 +42,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="59dp"
                 android:layout_marginBottom="8dp"
                 android:padding="10dp"
                 app:srcCompat="@drawable/share" />
@@ -54,11 +54,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="100dp"
+                android:layout_marginEnd="109dp"
                 android:layout_marginBottom="8dp"
                 android:padding="10dp"
-                app:srcCompat="@drawable/speech_text"
-                app:tint="#3269FF" />
+                app:srcCompat="@drawable/speech_text" />
+
 
 
             <ImageView
@@ -66,7 +66,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:padding="10dp"
                 app:srcCompat="@drawable/back" />
@@ -113,7 +112,6 @@
             android:padding="10dp"
             android:textColorHint="@color/lgt_gry"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
 
         <EditText
             android:id="@+id/et_notes"

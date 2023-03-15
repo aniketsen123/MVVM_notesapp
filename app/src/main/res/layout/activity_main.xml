@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@drawable/gradient_bg"
     tools:context=".MainActivity">
 
 
@@ -12,7 +12,7 @@
         android:id="@+id/fl_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/front_ui_bg"
+        android:background="@drawable/heading_bg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/searchView"
@@ -24,26 +24,26 @@
             android:layout_height="wrap_content"
             android:text="MVVM NotesApp"
             android:fontFamily="@font/productsansbold"
-            android:textColor="@color/white"
+            android:textColor="#4E54C8"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_margin="5dp">
 
-            />
-
+        </TextView>
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
+        android:layout_marginTop="-10dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/main_screen_bg"
+        android:background="@drawable/gradient_bg"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:listitem="@layout/list_item" />
 
@@ -51,10 +51,11 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="@drawable/edit_text_background"
         android:layout_margin="20dp"
+        android:background="@drawable/edit_text_background"
         android:iconifiedByDefault="false"
         android:queryHint="Search Notes"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
         android:layout_marginBottom="20dp"
         android:animateLayoutChanges="true"
         android:background="@drawable/fab_drawable"
-        android:backgroundTint="#FCFFE7"
+        android:backgroundTint="#958EC3"
         android:clipToPadding="false"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -85,8 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/normal_button"
-            app:backgroundTint="#FCFFE7"
+            app:backgroundTint="#958EC3"
             app:borderWidth="0dp"
             app:elevation="0dp"
             app:fabSize="normal"
@@ -101,7 +101,7 @@
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:fontFamily="@font/productsansbold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"/>
 
     </LinearLayout>

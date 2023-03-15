@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tec.mvvm_notesapp.Database.NoteDatabase
 import com.tec.mvvm_notesapp.Database.NotesRepository
+import com.tec.mvvm_notesapp.add_note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.properties.ReadOnlyProperty
 
 class NoteViewModel(application: Application):AndroidViewModel(application) {
 
@@ -31,4 +33,5 @@ class NoteViewModel(application: Application):AndroidViewModel(application) {
     fun update(notes: Notes)=viewModelScope.launch(Dispatchers.IO) {
         repository.update(notes)
     }
+
 }
