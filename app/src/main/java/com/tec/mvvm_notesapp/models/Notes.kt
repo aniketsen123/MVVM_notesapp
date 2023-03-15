@@ -12,5 +12,6 @@ data class Notes(
     @ColumnInfo(name = "subtitle") val subtitle: String?,
     @ColumnInfo(name = "note") val note: String?,
     @ColumnInfo(name = "date") val date: String?
+
 ) : Serializable {
 }

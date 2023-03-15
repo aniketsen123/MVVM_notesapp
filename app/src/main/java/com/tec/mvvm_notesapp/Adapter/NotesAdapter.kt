@@ -93,12 +93,12 @@ class NotesAdapter(
 
     fun RandomColor(): Int {
         val list = ArrayList<Int>()
-        list.add(R.color.blue)
-        list.add(R.color.green)
-        list.add(R.color.indigo)
-        list.add(R.color.rose)
+        list.add(R.color.light_green)
+        list.add(R.color.light_purple)
+        list.add(R.color.grey)
+        list.add(R.color.teal_200)
         list.add(R.color.choco)
-        list.add(R.color.pink)
+        list.add(R.color.Color3)
 
         val seed = System.currentTimeMillis().toInt()
         val randomIndex = Random(seed.toLong()).nextInt(list.size)
